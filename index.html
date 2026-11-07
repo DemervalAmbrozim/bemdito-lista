@@ -1,0 +1,16 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BEMDITO: viagem combinada</title>
+<style>body{font:18px system-ui,sans-serif;margin:0;background:#f4f6f8;color:#111}main{max-width:480px;margin:0 auto;padding:20px}h1{font-size:26px}label{display:block;margin:14px 0 4px;font-weight:600}input,select{width:100%;box-sizing:border-box;padding:13px;font-size:18px;border:1px solid #9aa;border-radius:10px}button{width:100%;margin-top:20px;padding:16px;font-size:20px;border:0;border-radius:12px;background:#0a6;color:#fff}.l{display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:15px;font-weight:400}.l input{width:auto;margin-top:4px}#m{margin-top:16px;font-weight:600}</style></head><body><main>
+<h1>Viagem combinada, com motorista de confiança.</h1>
+<p>Quer ir e voltar do trabalho com preço fechado e sempre o mesmo motorista? Precisa levar seu pai ou sua mãe ao médico sem preocupação? Deixe seu contato, o bairro e o horário. Ainda não cobramos nada: estamos montando os primeiros grupos em Vitória e região.</p>
+<form id="f"><label>Nome<input name="nome" required maxlength="80"></label>
+<label>WhatsApp<input name="contato" required maxlength="80" inputmode="tel"></label>
+<label>Tipo<select name="modalidade" required><option value="">Escolha</option><option value="trabalho">Ir e voltar do trabalho</option><option value="idoso">Idoso</option><option value="executivo">Executivo</option><option value="estudante">Estudante</option><option value="empresa">Empresa</option></select></label>
+<label>Bairro de casa<input name="bairro_casa" maxlength="60"></label><label>Bairro de destino<input name="bairro_destino" maxlength="60"></label><label>Horário<input name="horario" maxlength="60" placeholder="ex.: entrada 8h, saída 17h"></label>
+<label class="l"><input type="checkbox" id="lg" required> Autorizo usar estes dados só para o BEMDITO me avisar sobre o serviço; posso pedir a exclusão a qualquer hora.</label>
+<button>Quero participar</button><div id="m"></div></form></main>
+<script>
+var URL_="https://ixeuemgxmteuezcqovtz.supabase.co",ANON="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml4ZXVlbWd4bXRldWV6Y3FvdnR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1OTUzMjUsImV4cCI6MjEwODE3MTMyNX0.Ox4Dlt43I4qsfOpZCrW4qj2xA2MVKqFKuu1cq-Bg1lA";
+document.getElementById('f').onsubmit=function(e){e.preventDefault();var d=Object.fromEntries(new FormData(e.target));d.aceitou_lgpd=document.getElementById('lg').checked;
+fetch(URL_+'/rest/v1/bemdito_interessados',{method:'POST',headers:{apikey:ANON,Authorization:'Bearer '+ANON,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify(d)})
+.then(function(r){document.getElementById('m').textContent=r.ok?'Recebido! Avisaremos pelo WhatsApp.':'Não deu certo, tente de novo.';if(r.ok)e.target.reset()}).catch(function(){document.getElementById('m').textContent='Sem internet, tente de novo.'})};
+</script></body></html>
