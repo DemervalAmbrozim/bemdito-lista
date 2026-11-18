@@ -7,7 +7,7 @@
 <label>Tipo<select name="modalidade" required><option value="">Escolha</option><option value="trabalho">Ir e voltar do trabalho</option><option value="idoso">Idoso</option><option value="executivo">Executivo</option><option value="estudante">Estudante</option><option value="empresa">Empresa</option></select></label>
 <label>Bairro de casa<input name="bairro_casa" maxlength="60"></label><label>Bairro de destino<input name="bairro_destino" maxlength="60"></label><label>Horário<input name="horario" maxlength="60" placeholder="ex.: entrada 8h, saída 17h"></label>
 <label class="l"><input type="checkbox" id="lg" required> Autorizo usar estes dados só para o BEMDITO me avisar sobre o serviço; posso pedir a exclusão a qualquer hora.</label>
-<button>Quero participar</button><div id="m"></div></form></main>
+<button>Quero participar</button><div id="m"></div></form><p style="font-size:14px;margin-top:18px">Ao participar, você concorda com o uso do seu contato para avisar do BEMDITO. Veja a <a href="privacidade.html">Política de Privacidade</a>.</p></main>
 <script>
 var URL_="https://ixeuemgxmteuezcqovtz.supabase.co",ANON="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml4ZXVlbWd4bXRldWV6Y3FvdnR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1OTUzMjUsImV4cCI6MjEwODE3MTMyNX0.Ox4Dlt43I4qsfOpZCrW4qj2xA2MVKqFKuu1cq-Bg1lA";
 document.getElementById('f').onsubmit=function(e){e.preventDefault();var d=Object.fromEntries(new FormData(e.target));d.aceitou_lgpd=document.getElementById('lg').checked;
