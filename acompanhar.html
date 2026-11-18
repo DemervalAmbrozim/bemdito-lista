@@ -1,0 +1,16 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BEMDITO: acompanhar viagem</title>
+<style>body{font:20px system-ui,sans-serif;margin:0;background:#f4f6f8;color:#111}main{max-width:480px;margin:0 auto;padding:20px}.c{background:#fff;border-radius:16px;padding:18px;box-shadow:0 1px 6px #0002}b{font-size:24px}</style></head><body><main>
+<h1>Acompanhar viagem</h1><div class="c" id="r">Carregando...</div>
+<p style="font-size:14px;color:#555">Mostramos só o necessário: situação, horário e o motorista (primeiro nome, carro e placa). O link vale até 6 horas depois da viagem.</p></main>
+<script>
+var URL_="https://ixeuemgxmteuezcqovtz.supabase.co",ANON="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml4ZXVlbWd4bXRldWV6Y3FvdnR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1OTUzMjUsImV4cCI6MjEwODE3MTMyNX0.Ox4Dlt43I4qsfOpZCrW4qj2xA2MVKqFKuu1cq-Bg1lA",t=location.hash.slice(1),R=document.getElementById('r');
+var S={pedida:'Aguardando o motorista confirmar',confirmada:'Confirmada',a_caminho:'Motorista a caminho',em_viagem:'Em viagem',concluida:'Viagem concluída',cancelada:'Cancelada',sem_motorista:'Sem motorista'};
+function ver(){ if(!/^[0-9a-f-]{36}$/.test(t)){R.textContent='Link inválido.';return}
+ fetch(URL_+'/rest/v1/rpc/bemdito_acompanhar',{method:'POST',headers:{apikey:ANON,Authorization:'Bearer '+ANON,'Content-Type':'application/json'},body:JSON.stringify({p_token:t})}).then(function(r){return r.json()}).then(function(j){
+  if(!j){R.textContent='Link vencido ou inexistente.';return}
+  R.textContent='';var b=document.createElement('b');b.textContent=S[j.situacao]||j.situacao;R.appendChild(b);R.appendChild(document.createElement('br'));
+  R.appendChild(document.createTextNode(new Date(j.quando).toLocaleString('pt-BR')));
+  if(j.motorista){R.appendChild(document.createElement('br'));R.appendChild(document.createTextNode('Motorista: '+j.motorista));R.appendChild(document.createElement('br'));R.appendChild(document.createTextNode((j.modelo||'')+' '+(j.cor||'')+' · placa '+(j.placa||'')))}
+ }).catch(function(){R.textContent='Sem internet. Tente de novo.'})}
+ver();setInterval(ver,20000);
+</script></body></html>
